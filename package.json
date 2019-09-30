@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "lint": "eslint ./*/**",
+    "lint": "./node_modules/.bin/eslint ./*/**",
     "start": "npm run lint && nodemon ./server",
     "test": "jest --watchAll"
   },
