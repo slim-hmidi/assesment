@@ -1,6 +1,6 @@
 const { ErrorHandler } = require('../utils/error');
 const {
-  addressFormat, addressLabelFormat, ileDeFrance, paca,
+  addressLabelFormat, ileDeFrance, paca,
 } = require('../utils/helpers');
 
 module.exports.geoloacteBusinessUnit = (req, res) => {
@@ -10,7 +10,8 @@ module.exports.geoloacteBusinessUnit = (req, res) => {
       throw new ErrorHandler(404, 'Missing required address field!');
     }
 
-    if (!addressFormat.test(address)) {
+    const checkAddressFormat = /^\d+\s([a-zA-Z]+\s?)+,\s\d{5}\s([a-zA-Z]+\s?)+$/g.test(address);
+    if (!checkAddressFormat) {
       throw new ErrorHandler(404, `Address field should has this format: ${addressLabelFormat}`);
     }
 
@@ -38,6 +39,6 @@ module.exports.geoloacteBusinessUnit = (req, res) => {
       BusinessUnit: 'Other',
     });
   } catch (error) {
-    throw new ErrorHandler(500, error);
+    return res.status(error.statusCode || 500).send(error);
   }
 };
