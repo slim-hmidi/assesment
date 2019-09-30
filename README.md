@@ -18,7 +18,10 @@
  ```
  http://localhost:3000/locate_business_unit
 
- in body object enter the address field.
+ in body object put:
+ {
+   address: 'enter a valid address here'
+ }
 
  ```
 
